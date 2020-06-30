@@ -20,11 +20,11 @@ public class Main {
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        // statement
+        // 打开Session，内部创建Executor
         SqlSession sqlSession = sqlSessionFactory.openSession();
         // 获取Mapper
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        // 执行
+        // 执行Mapper方法
         User user = userMapper.getUser();
         System.out.println(user);
     }
