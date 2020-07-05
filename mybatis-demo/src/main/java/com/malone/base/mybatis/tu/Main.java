@@ -1,5 +1,8 @@
 package com.malone.base.mybatis.tu;
 
+import com.malone.base.mybatis.tu.interceptor.AInterceptor;
+import com.malone.base.mybatis.tu.interceptor.BInterceptor;
+import com.malone.base.mybatis.tu.interceptor.CInterceptor;
 import com.malone.base.mybatis.tu.mapper.UserMapper;
 import com.malone.base.mybatis.tu.model.User;
 import org.apache.ibatis.io.Resources;
@@ -20,6 +23,9 @@ public class Main {
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        sqlSessionFactory.getConfiguration().addInterceptor(new AInterceptor());
+        sqlSessionFactory.getConfiguration().addInterceptor(new BInterceptor());
+        sqlSessionFactory.getConfiguration().addInterceptor(new CInterceptor());
         // 打开Session，内部创建Executor
         SqlSession sqlSession = sqlSessionFactory.openSession();
         // 获取Mapper
